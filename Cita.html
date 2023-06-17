@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generador de citas APA</title>
+</head>
+<body>
+  <h1>Generador de citas APA</h1>
+
+  <div>
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo">
+  </div>
+  <div>
+    <label for="nombreAutor">Nombre autor:</label>
+    <input type="text" id="nombreAutor">
+  </div>
+  <div>
+    <label for="apellidoAutor">Apellido autor:</label>
+    <input type="text" id="apellidoAutor">
+  </div>
+  <div>
+    <label for="year">Año:</label>
+    <input type="text" id="year">
+  </div>
+  <div>
+    <label for="editorial">Editorial:</label>
+    <input type="text" id="editorial">
+  </div>
+
+  <button onclick="generarCita()">Generar Cita APA</button>
+
+  <div id="citaGenerada"></div>
+
+  <script>
+    function generarCita() {
+      const titulo = document.getElementById('titulo').value;
+      const nombreAutor = document.getElementById('nombreAutor').value;
+      const apellidoAutor = document.getElementById('apellidoAutor').value;
+      const year = document.getElementById('year').value;
+      const editorial = document.getElementById('editorial').value;
+
+      if (titulo && nombreAutor && apellidoAutor && year && editorial) {
+        const autorIniciales = obtenerIniciales(nombreAutor);
+        const citaAPA = `${apellidoAutor}, ${autorIniciales}. (${year}). <i>${titulo}</i>. ${editorial}.`;
+        document.getElementById('citaGenerada').innerHTML = citaAPA;
+      } else {
+        document.getElementById('citaGenerada').innerHTML = 'Faltan propiedades por llenar.';
+      }
+    }
+
+    function obtenerIniciales(nombre) {
+      const iniciales = nombre.split(' ').map(n => n.charAt(0).toUpperCase()).join('');
+      return iniciales;
+    }
+  </script>
+</body>
+</html>
